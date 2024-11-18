@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RobotStudioAddIn xmlns="urn:abb-robotics-robotstudio-addin"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="urn:abb-robotics-robotstudio-addin file:///C:\Program%20Files%20(x86)\ABB\SDK\RobotStudio%202024%20SDK\RobotStudioAddin.xsd"
+                  autoLoad="false">
+
+  <!-- Make sure that ApplicationId is unique -->
+  <ApplicationId>com.mycompany.ABBasics</ApplicationId>
+  
+  <!-- <DisplayName>ABBasics</DisplayName/> -->
+  <!-- <DisplayVersion>1.0.0.1</DisplayVersion/> -->
+  <!-- <Description>ABBasics description</Description/> -->
+
+  <AddInType>General</AddInType>
+
+  <Assembly>
+    <!-- The name of the dll that contains the add-in entry point -->
+    <FileName>ABBasics.dll</FileName>
+
+    <!-- Specify the full name of the entry method if it is not the standard AddinMain() -->
+    <!-- <Entrypoint></Entrypoint> -->
+    <!-- Specify the location of the add-in assembly if it is not in the same directory as the .rsaddin file -->
+    <Path>C:\Users\rdurs\source\repos\ABBasics\ABBasics\bin\Debug</Path>
+  </Assembly>
+
+  <!-- By default, the minimum host version is equal to the SDK version -->
+  <!-- You can change this if your add-in supports older RobotStudio versions -->
+  <MinimumHostVersion>24.1</MinimumHostVersion>
+  <Dependencies>Station</Dependencies>
+  <!-- Change Platform to x86 if your add-in uses any native x86 components -->
+  <Platform>Any</Platform>
+
+</RobotStudioAddIn>

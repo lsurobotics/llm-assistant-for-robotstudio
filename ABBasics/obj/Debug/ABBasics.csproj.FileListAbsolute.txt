@@ -1,0 +1,7 @@
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\bin\Debug\ABBasics.rsaddin
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\bin\Debug\ABBasics.dll
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\bin\Debug\ABBasics.pdb
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\obj\Debug\ABBasics.csproj.AssemblyReference.cache
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\obj\Debug\ABBasics.csproj.CoreCompileInputs.cache
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\obj\Debug\ABBasics.dll
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\obj\Debug\ABBasics.pdb
