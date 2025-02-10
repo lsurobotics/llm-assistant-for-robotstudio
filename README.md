@@ -27,7 +27,7 @@ The target audience for this application are users who have little to no experie
     - select the most recent version and follow the install guide
 5. Open Visual Studio and select new project and search for "RobotStudio <version> Empty Add-in
     - If the templates do not appear, you may need to manually copy the folder containing the template zip-files into:
-      ../Visual Studio <version>/Templates/ProjectTemplates/Visual C#
+      ../Visual Studio <version>/Templates/ProjectTemplates/Visual Basic
 
 ### Running a Custom RobotStudio Add-In
 To run a RobotStudio add-in you have created there are 3 steps
