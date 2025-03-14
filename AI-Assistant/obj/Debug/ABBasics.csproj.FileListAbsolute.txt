@@ -1,0 +1,14 @@
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\bin\Debug\ABBasics.rsaddin
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\bin\Debug\ABBasics.dll
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\bin\Debug\ABBasics.pdb
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\obj\Debug\ABBasics.csproj.AssemblyReference.cache
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\obj\Debug\ABBasics.csproj.CoreCompileInputs.cache
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\obj\Debug\ABBasics.dll
+C:\Users\rdurs\source\repos\ABBasics\ABBasics\obj\Debug\ABBasics.pdb
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\ABBasics\obj\Debug\ABBasics.dll
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\ABBasics\obj\Debug\ABBasics.pdb
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\ABBasics\bin\Debug\ABBasics.rsaddin
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\ABBasics\bin\Debug\ABBasics.dll
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\ABBasics\bin\Debug\ABBasics.pdb
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\ABBasics\obj\Debug\ABBasics.csproj.AssemblyReference.cache
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\ABBasics\obj\Debug\ABBasics.csproj.CoreCompileInputs.cache

@@ -5,22 +5,22 @@
                   autoLoad="false">
 
   <!-- Make sure that ApplicationId is unique -->
-  <ApplicationId>com.mycompany.ABBasics</ApplicationId>
+  <ApplicationId>com.mycompany.AI-Assistant</ApplicationId>
   
-  <!-- <DisplayName>ABBasics</DisplayName/> -->
+  <!-- <DisplayName>AI-Assistant</DisplayName/> -->
   <!-- <DisplayVersion>1.0.0.1</DisplayVersion/> -->
-  <!-- <Description>ABBasics description</Description/> -->
+  <!-- <Description>AI-Assistant description</Description/> -->
 
   <AddInType>General</AddInType>
 
   <Assembly>
     <!-- The name of the dll that contains the add-in entry point -->
-    <FileName>ABBasics.dll</FileName>
+    <FileName>AI-Assistant.dll</FileName>
 
     <!-- Specify the full name of the entry method if it is not the standard AddinMain() -->
     <!-- <Entrypoint></Entrypoint> -->
     <!-- Specify the location of the add-in assembly if it is not in the same directory as the .rsaddin file -->
-    <Path>C:\Users\rdurs\source\repos\ABBasics\ABBasics\bin\Debug</Path>
+    <Path>C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\bin\Debug</Path>
   </Assembly>
 
   <!-- By default, the minimum host version is equal to the SDK version -->

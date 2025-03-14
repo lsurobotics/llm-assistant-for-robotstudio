@@ -1,0 +1,7 @@
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\obj\Debug\AI-Assistant.csproj.AssemblyReference.cache
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\obj\Debug\AI-Assistant.csproj.CoreCompileInputs.cache
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\bin\Debug\AI-Assistant.rsaddin
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\bin\Debug\AI-Assistant.dll
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\bin\Debug\AI-Assistant.pdb
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\obj\Debug\AI-Assistant.dll
+C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\obj\Debug\AI-Assistant.pdb

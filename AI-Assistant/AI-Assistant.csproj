@@ -8,8 +8,8 @@
     <ProjectGuid>{26C08F38-877E-49F6-A950-70C61D2543AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ABBasics</RootNamespace>
-    <AssemblyName>ABBasics</AssemblyName>
+    <RootNamespace>assistant</RootNamespace>
+    <AssemblyName>AI-Assistant</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -23,7 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <StartAction>Program</StartAction>
     <StartProgram>$(MSBuildProgramFiles32)\ABB\RobotStudio 2024\Bin\RobotStudio.exe</StartProgram>
-    <StartArguments>/addin:"C:\Users\rdurs\source\repos\ABBasics\ABBasics\bin\Debug\ABBasics.rsaddin"</StartArguments>
+    <StartArguments>/addin:"C:\Users\rdurs\source\repos\AI-Assistant\AI-Assistant\bin\Debug\AI-Assistant.rsaddin"</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
     <StartAction>Program</StartAction>
     <StartProgram>$(MSBuildProgramFiles32)\ABB\RobotStudio 2024\Bin\RobotStudio.exe</StartProgram>
-    <StartArguments>/addin:"C:\Users\rdurs\source\repos\ABBasics\ABBasics\bin\Release\ABBasics.rsaddin"</StartArguments>
+    <StartArguments>/addin:"C:\Users\rdurs\source\repos\AI-Assistant\AI-Assistant\bin\Release\AI-Assistant.rsaddin"</StartArguments>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ABB.Robotics.Math">
@@ -75,13 +75,15 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+	  <Reference Include="System.Drawing" />
+	  <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ABBasics.rsaddin">
+    <None Include="AI-Assistant.rsaddin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
