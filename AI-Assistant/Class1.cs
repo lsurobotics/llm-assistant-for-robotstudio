@@ -59,7 +59,10 @@ namespace Assistant
             }
         }
 
-        private static CommandBarButton CreateButton(string id, string label, string helpText, string iconFileName, ExecuteCommandEventHandler eventHandler)
+        /// <summary>
+        /// creates an ABB RobotStudio CommandBarButton instance using the provided parameters
+        /// </summary>
+        internal static CommandBarButton CreateButton(string id, string label, string helpText, string iconFileName, ExecuteCommandEventHandler eventHandler)
         {
             string assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string projectDir = Directory.GetParent(assemblyDir)?.Parent?.FullName;
@@ -75,22 +78,24 @@ namespace Assistant
             return button;
         }
 
-        private static void Ask_ChatGPT(object sender, ExecuteCommandEventArgs e)
+        /// <summary>
+        /// generates a window containing an upper and lower textbox. 
+        /// Text can be entered into the upper textbox and on newline press will be appended to the lower textbox where a response from the LLM will also be generated and appended.
+        /// The lower textbox cannot be directly altered by the user.
+        /// </summary>
+        internal static void Ask_ChatGPT(object sender, ExecuteCommandEventArgs e)
         {
             try
             {
-                // contains all other control elements
                 var panel = new Panel
                 {
                     Dock = DockStyle.Fill
                 };
-                // for user input
                 var upperTextBox = new RichTextBox
                 {
                     Font = new Font("Arial", 12, FontStyle.Regular),
                     Dock = DockStyle.Top,
                 };
-                // for AI response
                 var lowerTextBox = new RichTextBox
                 {
                     Font = new Font("Arial", 12, FontStyle.Regular),
@@ -102,9 +107,6 @@ namespace Assistant
                     ReadOnly = true // Make it read-only
                 };
 
-
-                // we do this here so we don't have to pass or find multiple control objects
-                // from a helper function
                 upperTextBox.KeyDown += async (s, args) =>
                 {
                     // If the user starts typing for the first time, remove placeholder
@@ -127,45 +129,9 @@ namespace Assistant
                             // Resetting the upper text box for new input
                             upperTextBox.Clear();
                             upperTextBox.Text = "Type your question here...";
-                            upperTextBox.ForeColor = Color.Gray; // Placeholder color
+                            upperTextBox.ForeColor = Color.Gray;
 
-
-                            // Setting up AI response
                             lowerTextBox.SelectionIndent = 60; // Indent AI response
-
-                            // grabbing metadata to feed the AI
-                            string version = RobotStudioAPI.Version.ToString();
-                            string robotModel = null;
-                            string toolName = null;
-                            string isActive = "Assume the robot in inactive";
-                            if (Project.ActiveProject != null && Station.ActiveStation != null)
-                            {
-                                foreach (GraphicComponent comp in Station.ActiveStation.GraphicComponents)
-                                {
-                                    if (comp is Mechanism robot)
-                                    {
-                                        // Perform actions on the robot
-                                        log($"Found Robot: {robot.Name} [{robot.ModelName}]");
-                                        robotModel = robot.ModelName;
-
-                                        if (robot.NumActiveJoints == 0)
-                                        {
-                                            log("Robot is available.");
-                                            isActive = "The robot is not active.";
-                                        }
-                                        else
-                                        { 
-                                            log($"Robot is currently in use. [{robot.NumActiveJoints} active joints]");
-                                            isActive = "The robot is currently active.";
-                                        }
-                                    }
-                                    if (comp is Mechanism tool)
-                                    {
-                                        log($"Found Tool: {tool.Name}");
-                                        toolName = tool.Name;
-                                    }
-                                }
-                            }
 
                             // making the actual API call to ChatGPT
                             using(HttpClient client = new HttpClient())
@@ -173,23 +139,18 @@ namespace Assistant
                                 string apiKey = Environment.GetEnvironmentVariable("chatgpt_api_key");
                                 string endpoint = Environment.GetEnvironmentVariable("chatgpt_endpoint");
                                 string deploymentID = Environment.GetEnvironmentVariable("chatgpt_deployment_id");
-
-                                // For Debugging
-                                //log($"API KEY: {(string.IsNullOrEmpty(apiKey) ? "Not Set" : "set ")}");
-                                //log($"API ENDPOINT: {(string.IsNullOrEmpty(endpoint) ? "Not Set" : "set ")}");
-                                //log($"DeploymentID: {(string.IsNullOrEmpty(deploymentID) ? "Not Set" : "set ")}");
-
                                 string requestUri = $"{endpoint}/openai/deployments/{deploymentID}/chat/completions?api-version=2024-08-01-preview";
 
                                 client.DefaultRequestHeaders.Add("api-key", apiKey);
                                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                                 // constructing the system string content
-                                string robotSubString = $"You are working with a {(robotModel ?? "generic ABB")} robot";
-                                robotSubString += toolName == null ? " which is not equipped with a tool." : $" equipped with a {toolName} tool."
+                                string[] metadata = get_metadata();
+                                string robotSubString = $"You are working with a {(metadata[1] ?? "generic ABB")} robot";
+                                robotSubString += metadata[2] == null ? " which is not equipped with a tool." : $" equipped with a {metadata[2]} tool.";
+                                string sysContent = $"You are an AI assistant working inside ABB's RobotStudio version {metadata[0]}. {robotSubString}. {metadata[3]}";
 
-                                string sysContent = $"You are an AI assistant working inside ABB's RobotStudio version {version}. {robotSubString}. {isActive}";
-
+                                // creating the messages to be sent to the API and serializing them into a format that the API can read
                                 var requestBody = new
                                 {
                                     messages = new[]
@@ -198,7 +159,6 @@ namespace Assistant
                                         new { role = "user", content = userIn }
                                     }
                                 };
-
                                 var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
 
                                 try
@@ -210,8 +170,7 @@ namespace Assistant
 
                                     var responseJson = JsonSerializer.Deserialize<JsonElement>(aiMessageJson);
 
-                                    // you have to do this, or it will display the full json, which includes metadata,
-                                    // and overall isn't easy to read like a string
+                                    // you have to do this, or it will display as a json and not a string
                                     string aiResponse = responseJson
                                         .GetProperty("choices")[0]
                                         .GetProperty("message")
@@ -264,12 +223,61 @@ namespace Assistant
             }
         }
 
-        private static void Open_Tutorials(object sender, ExecuteCommandEventArgs e)
+        /// <summary>
+        /// helper function for the tutorials button. Opens a browser window containing the officially ABB video tutorials.
+        /// </summary>
+        internal static void Open_Tutorials(object sender, ExecuteCommandEventArgs e)
         {
             Process.Start("https://new.abb.com/products/robotics/software-and-digital/robotstudio/tutorials");
         }
 
-        private static void log(string message)
+        /// <summary>
+        /// Gets metadata from the active project station.
+        /// </summary>
+        /// <returns>
+        /// A string array containing: [RobotStudio Version, Robot Model, Tool Name, Is Active Status].
+        /// </returns>
+        internal static string[] get_metadata()
+        {
+            string version = RobotStudioAPI.Version.ToString();
+            string robotModel = null;
+            string toolName = null;
+            string isActive = "Assume the robot is inactive";
+            if (Project.ActiveProject != null && Station.ActiveStation != null)
+            {
+                foreach (GraphicComponent comp in Station.ActiveStation.GraphicComponents)
+                {
+                    if (comp is Mechanism robot)
+                    {
+                        // Perform actions on the robot
+                        log($"Found Robot: {robot.Name} [{robot.ModelName}]");
+                        robotModel = robot.ModelName;
+
+                        if (robot.NumActiveJoints == 0)
+                        {
+                            log("Robot is available.");
+                            isActive = "The robot is not active.";
+                        }
+                        else
+                        {
+                            log($"Robot is currently in use. [{robot.NumActiveJoints} active joints]");
+                            isActive = "The robot is currently active.";
+                        }
+                    }
+                    if (comp is Mechanism tool)
+                    {
+                        log($"Found Tool: {tool.Name}");
+                        toolName = tool.Name;
+                    }
+                }
+            }
+            return [version, robotModel, toolName, isActive];
+        }
+
+        /// <summary>
+        /// logs the input string to the ABB RobotStudio console
+        /// </summary>
+        internal static void log(string message)
         {
             Logger.AddMessage(new LogMessage(message));
         }

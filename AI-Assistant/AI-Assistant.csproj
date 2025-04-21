@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
 	<LangVersion>latest</LangVersion>
     <FileAlignment>512</FileAlignment>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,6 +26,7 @@
     <StartAction>Program</StartAction>
     <StartProgram>$(MSBuildProgramFiles32)\ABB\RobotStudio 2024\Bin\RobotStudio.exe</StartProgram>
     <StartArguments>/addin:"C:\Users\rdurs\source\repos\AI-Assistant\AI-Assistant\bin\Debug\AI-Assistant.rsaddin"</StartArguments>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,6 +38,7 @@
     <StartAction>Program</StartAction>
     <StartProgram>$(MSBuildProgramFiles32)\ABB\RobotStudio 2024\Bin\RobotStudio.exe</StartProgram>
     <StartArguments>/addin:"C:\Users\rdurs\source\repos\AI-Assistant\AI-Assistant\bin\Release\AI-Assistant.rsaddin"</StartArguments>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 	<ItemGroup>
 		<Reference Include="ABB.Robotics.Math">
