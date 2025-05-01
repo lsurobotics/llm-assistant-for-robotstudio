@@ -107,6 +107,9 @@ namespace Assistant
                     ReadOnly = true // Make it read-only
                 };
 
+                upperTextBox.ForeColor = Color.Gray;
+                upperTextBox.Text = "Type your question here...";
+
                 upperTextBox.KeyDown += async (s, args) =>
                 {
                     // If the user starts typing for the first time, remove placeholder
@@ -130,8 +133,6 @@ namespace Assistant
                             upperTextBox.Clear();
                             upperTextBox.Text = "Type your question here...";
                             upperTextBox.ForeColor = Color.Gray;
-
-                            lowerTextBox.SelectionIndent = 60; // Indent AI response
 
                             // making the actual API call to ChatGPT
                             using(HttpClient client = new HttpClient())
@@ -161,6 +162,9 @@ namespace Assistant
                                 };
                                 var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
 
+                                lowerTextBox.SelectionIndent = 60; // Indent AI response
+                                lowerTextBox.AppendText("Generating Response ...");
+
                                 try
                                 {
                                     HttpResponseMessage response = await client.PostAsync(requestUri, content);
@@ -177,7 +181,11 @@ namespace Assistant
                                         .GetProperty("content")
                                         .GetString();
 
-                                    lowerTextBox.AppendText($"AI: {aiResponse}\n\n");
+                                    // removes the generating response placeholder and replaces it with the actual response
+                                    lowerTextBox.SelectionStart = lowerTextBox.TextLength - 23;
+                                    lowerTextBox.SelectionLength = 23;
+                                    lowerTextBox.SelectionIndent = 60;
+                                    lowerTextBox.SelectedText = $"AI: {aiResponse}\n\n";
                                 }
                                 catch (Exception ex)
                                 {
