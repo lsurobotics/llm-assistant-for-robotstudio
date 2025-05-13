@@ -146,10 +146,7 @@ namespace Assistant
                                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                                 // constructing the system string content
-                                string[] metadata = get_metadata();
-                                string robotSubString = $"You are working with a {(metadata[1] ?? "generic ABB")} robot";
-                                robotSubString += metadata[2] == null ? " which is not equipped with a tool." : $" equipped with a {metadata[2]} tool.";
-                                string sysContent = $"You are an AI assistant working inside ABB's RobotStudio version {metadata[0]}. {robotSubString}. {metadata[3]}";
+                                string sysContent = generate_system_message();
 
                                 // creating the messages to be sent to the API and serializing them into a format that the API can read
                                 var requestBody = new
@@ -280,6 +277,27 @@ namespace Assistant
                 }
             }
             return [version, robotModel, toolName, isActive];
+        }
+
+        /// <summary>
+        /// generates a system prompt for the LLM, which defines how the model should respond
+        /// to a user-submitted question
+        /// </summary>
+        internal static string generate_system_message()
+        {
+            string personaSTM = "Persona: Imagine you are an AI assistant for ABB’s RobotStudio, helping developers understand and troubleshoot robotic automation tasks. You provide guidance specifically within the simulation and programming environment of RobotStudio, focusing on user productivity and technical clarity. ";
+            string taskSTM = "Task: The task you are given is to assist a user with their RobotStudio question. You will first comprehend the user’s request, then provide a concise bulleted list of useful guidance or clarifications. Your response must stay within the scope of the user's question and RobotStudio’s features. ";
+            string restrictionSTM = "Restrictions: Your response’s formatting should only mirror the format given to you. Your response should only include information provided to you with this prompt. You are not allowed to use the internet for information. You are not allowed to generate code unless explicitly asked. Your response should not include setup instructions unless the user requests them. Your response should not repeat information. Your response should avoid long explanations and instead favor action-ready points. ";
+            string formatSTM = "Format/Mirror: Here is the format you are to mirror: Here’s what you can try… 1. (A general action or suggestion to address the question) 2. (Another tip or clarification relevant to the user’s query) 3. (Additional info or a potential next step, if applicable) ";
+            string addInfo = "If you need more specific details: (Example or deeper explanation of a step, such as what settings to adjust for payload configuration or how to input specific robot parameters.) - You may need to fine-tune additional settings, such as (advanced tip based on user query). If you’re still stuck: Check the RobotStudio manual for more detailed information. You can also check the ABB RobotStudio forums for common issues and solutions from other users. ";
+
+
+            string[] metadata = get_metadata();
+            string metadata_tmp = $"You are working with a {(metadata[1] ?? "generic ABB")} robot";
+            metadata_tmp += metadata[2] == null ? " which is not equipped with a tool." : $" equipped with a {metadata[2]} tool.";
+            string metadataSTM = $"Metadata: You are an AI assistant working inside ABB's RobotStudio version {metadata[0]}. {metadata_tmp}. {metadata[3]} ";
+
+            return metadataSTM + personaSTM + taskSTM + restrictionSTM + formatSTM + addInfo;
         }
 
         /// <summary>

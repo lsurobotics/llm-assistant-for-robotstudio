@@ -5,5 +5,3 @@ C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assis
 C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\bin\Debug\AI-Assistant.pdb
 C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\obj\Debug\AI-Assistant.dll
 C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\obj\Debug\AI-Assistant.pdb
-C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\obj\Debug\AI-Assis.93454D36.Up2Date
-C:\Users\ldurst2\source\repos\lsurobotics\llm-assistant-for-robotstudio\AI-Assistant\bin\Debug\System.Memory.dll
